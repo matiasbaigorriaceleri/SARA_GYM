@@ -14,6 +14,7 @@ from PySide6.QtWidgets import (
 from app.views.pages.socios_page import SociosPage
 from app.views.pages.membresias_page import MembresiasPage
 from app.views.pages.pagos_page import PagosPage
+from app.views.pages.checkin_page import CheckinPage
 
 COLOR_SIDEBAR = "#2a2a2a"
 COLOR_ACENTO = "#f05133"
@@ -68,6 +69,8 @@ class MainWindow(QMainWindow):
                 pagina = MembresiasPage()
             elif clave == "pagos":
                 pagina = PagosPage()
+            elif clave == "checkin":
+                pagina = CheckinPage()
             else:
                 pagina = self._crear_pagina_placeholder(etiqueta)
             self.paginas[clave] = pagina
