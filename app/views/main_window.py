@@ -11,6 +11,8 @@ from PySide6.QtWidgets import (
     QPushButton, QStackedWidget, QFrame,
 )
 
+from app.views.pages.socios_page import SociosPage
+
 COLOR_SIDEBAR = "#2a2a2a"
 COLOR_ACENTO = "#f05133"
 COLOR_ACENTO_TEXTO = "#c0451f"
@@ -58,7 +60,10 @@ class MainWindow(QMainWindow):
 
         self.stack = QStackedWidget()
         for etiqueta, clave in MENU_ITEMS:
-            pagina = self._crear_pagina_placeholder(etiqueta)
+            if clave == "socios":
+                pagina = SociosPage()
+            else:
+                pagina = self._crear_pagina_placeholder(etiqueta)
             self.paginas[clave] = pagina
             self.stack.addWidget(pagina)
         root_layout.addWidget(self.stack, stretch=1)
@@ -86,6 +91,8 @@ class MainWindow(QMainWindow):
         for etiqueta, clave in MENU_ITEMS:
             boton = QPushButton(etiqueta)
             boton.setCursor(Qt.PointingHandCursor)
+            boton.setFlat(True)
+            boton.setStyleSheet(self._estilo_boton(activo=False))
             boton.clicked.connect(lambda checked=False, c=clave: self._mostrar_pagina(c))
             sidebar_layout.addWidget(boton)
             self.botones_menu[clave] = boton
@@ -99,12 +106,14 @@ class MainWindow(QMainWindow):
 
         boton_cerrar_sesion = QPushButton("Cerrar sesión")
         boton_cerrar_sesion.setCursor(Qt.PointingHandCursor)
+        boton_cerrar_sesion.setFlat(True)
         boton_cerrar_sesion.setStyleSheet(self._estilo_boton(activo=False))
         boton_cerrar_sesion.clicked.connect(self._cerrar_sesion)
         sidebar_layout.addWidget(boton_cerrar_sesion)
 
         boton_cerrar = QPushButton("Cerrar")
         boton_cerrar.setCursor(Qt.PointingHandCursor)
+        boton_cerrar.setFlat(True)
         boton_cerrar.setStyleSheet(self._estilo_boton(activo=False))
         boton_cerrar.clicked.connect(self._cerrar_aplicacion)
         sidebar_layout.addWidget(boton_cerrar)
@@ -115,13 +124,13 @@ class MainWindow(QMainWindow):
     def _estilo_boton(activo: bool) -> str:
         if activo:
             return (
-                f"QPushButton {{ color: {COLOR_ACENTO}; background: transparent; text-align: left;"
-                f" padding: 9px 20px; border: none; border-left: 2px solid {COLOR_ACENTO};"
-                f" font-size: 13px; font-weight: 500; }}"
+                f"QPushButton {{ color: {COLOR_ACENTO}; background-color: transparent; text-align: left;"
+                f" padding: 9px 20px; border: none; outline: none;"
+                f" border-left: 2px solid {COLOR_ACENTO}; font-size: 13px; font-weight: 500; }}"
             )
         return (
-            f"QPushButton {{ color: {COLOR_TEXTO_SIDEBAR}; background: transparent; text-align: left;"
-            f" padding: 9px 22px; border: none; font-size: 13px; }}"
+            f"QPushButton {{ color: {COLOR_TEXTO_SIDEBAR}; background-color: transparent; text-align: left;"
+            f" padding: 9px 22px; border: none; outline: none; font-size: 13px; }}"
             f"QPushButton:hover {{ background-color: {COLOR_SIDEBAR_HOVER}; }}"
         )
 
