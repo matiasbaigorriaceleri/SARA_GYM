@@ -15,6 +15,7 @@ from app.views.pages.socios_page import SociosPage
 from app.views.pages.membresias_page import MembresiasPage
 from app.views.pages.pagos_page import PagosPage
 from app.views.pages.checkin_page import CheckinPage
+from app.views.pages.dashboard_page import Dashboard
 
 COLOR_SIDEBAR = "#2a2a2a"
 COLOR_ACENTO = "#f05133"
@@ -63,7 +64,9 @@ class MainWindow(QMainWindow):
 
         self.stack = QStackedWidget()
         for etiqueta, clave in MENU_ITEMS:
-            if clave == "socios":
+            if clave == "dashboard":
+                pagina = Dashboard()
+            elif clave == "socios":
                 pagina = SociosPage()
             elif clave == "membresias":
                 pagina = MembresiasPage()
