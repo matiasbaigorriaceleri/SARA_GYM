@@ -1,0 +1,13 @@
+# SARA GYM — dependencias del proyecto
+# Instalar con: pip install -r requirements.txt (con el venv activado)
+
+SQLAlchemy>=2.0
+PySide6>=6.6
+bcrypt>=4.0
+
+# --- FASE 2 (comprobantes de pago) ---
+# reportlab>=4.0
+# pywin32 ; sys_platform == 'win32'   # impresión GDI directa en Windows, igual que SARA POS
+
+# --- FASE 4 (empaquetado) ---
+# pyinstaller>=6.0
