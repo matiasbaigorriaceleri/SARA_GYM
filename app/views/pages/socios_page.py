@@ -54,6 +54,7 @@ class SociosPage(QWidget):
 
         boton_nuevo = QPushButton("+ Nuevo socio")
         boton_nuevo.setCursor(Qt.PointingHandCursor)
+        boton_nuevo.setFlat(True)
         boton_nuevo.setStyleSheet(
             f"QPushButton {{ background-color: {COLOR_ACENTO}; color: white; border: none;"
             f" border-radius: 6px; padding: 8px 18px; font-weight: 500; font-size: 13px; }}"
@@ -79,6 +80,10 @@ class SociosPage(QWidget):
             " padding: 8px; border: none; }"
         )
         layout.addWidget(self.tabla, stretch=1)
+
+    def showEvent(self, event) -> None:
+        super().showEvent(event)
+        self._cargar_socios()
 
     def _cargar_socios(self) -> None:
         session = get_session()

@@ -74,6 +74,10 @@ class TiposMembresiaPage(QWidget):
         )
         layout.addWidget(self.tabla, stretch=1)
 
+    def showEvent(self, event) -> None:
+        super().showEvent(event)
+        self._cargar_tipos()
+
     def _cargar_tipos(self) -> None:
         session = get_session()
         try:
